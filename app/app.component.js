@@ -1,4 +1,4 @@
-System.register(['angular2/core'], function(exports_1) {
+System.register(['angular2/core', 'angular2/router', './teams/teams.component', './employees/employee-list.component', './employees/employee-detail.component', './dialog.service', './employees/employee.service'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,12 +8,30 @@ System.register(['angular2/core'], function(exports_1) {
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1;
+    var core_1, router_1, teams_component_1, employee_list_component_1, employee_detail_component_1, dialog_service_1, employee_service_1;
     var AppComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
+            },
+            function (router_1_1) {
+                router_1 = router_1_1;
+            },
+            function (teams_component_1_1) {
+                teams_component_1 = teams_component_1_1;
+            },
+            function (employee_list_component_1_1) {
+                employee_list_component_1 = employee_list_component_1_1;
+            },
+            function (employee_detail_component_1_1) {
+                employee_detail_component_1 = employee_detail_component_1_1;
+            },
+            function (dialog_service_1_1) {
+                dialog_service_1 = dialog_service_1_1;
+            },
+            function (employee_service_1_1) {
+                employee_service_1 = employee_service_1_1;
             }],
         execute: function() {
             AppComponent = (function () {
@@ -22,8 +40,20 @@ System.register(['angular2/core'], function(exports_1) {
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'my-app',
-                        template: '<h1>My First Angular 2 App</h1>'
-                    }), 
+                        template: "\n    <h1 class=\"title\">Angular 2 - Demo App</h1>\n    <nav>\n      <a [routerLink]=\"['Teams']\">Teams</a>\n      <a [routerLink]=\"['Employees']\">Employees</a>\n    </nav>\n    <router-outlet></router-outlet>\n  ",
+                        providers: [dialog_service_1.DialogService, employee_service_1.EmployeeService],
+                        directives: [router_1.ROUTER_DIRECTIVES]
+                    }),
+                    router_1.RouteConfig([
+                        {
+                            path: '/teams/...',
+                            name: 'Teams',
+                            component: teams_component_1.TeamsComponent,
+                            useAsDefault: true
+                        },
+                        { path: '/employees', name: 'Employees', component: employee_list_component_1.EmployeeListComponent },
+                        { path: '/employee/:id', name: 'EmployeeDetail', component: employee_detail_component_1.EmployeeDetailComponent },
+                    ]), 
                     __metadata('design:paramtypes', [])
                 ], AppComponent);
                 return AppComponent;
